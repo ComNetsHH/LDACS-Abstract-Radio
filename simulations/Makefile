@@ -16,10 +16,3 @@ build-debug:
 build-release:	
 	echo -e "\nLDACSAbstractRadio"; \
 	cd ../src; opp_makemake -f --deep -KINET_PROJ=../../inet4 -DINET_IMPORT -I../../inet4/src -L../../inet4/src -lINET; make -j8 MODE=release; cd ../simulations; 
-
-# GLOBAL VARIABLES  can be shared among all targets
-# default binary in RELEASE mode
-SIM_BINARY = ../out/gcc-release/src/ldacs-abstract-radio
-SIM_BINARY_DBG = ../out/gcc-debug/src/ldacs-abstract-radio_dbg
-# include .ned files
-INCL = -n ../src:./:../../inet4/src/
