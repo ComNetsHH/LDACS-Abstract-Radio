@@ -1,4 +1,4 @@
-// The LDACS Abstract Radio model of radio communications for accurate LDACS air-to-air transmission simulation.
+// The LDACS Abstract Radio models the radio communications for accurate LDACS air-to-air simulation.
 // Copyright (C) 2024  Musab Ahmed, Konrad Fuger, Koojana Kuladinithi, Andreas Timm-Giel, Institute of Communication Networks, Hamburg University of Technology, Hamburg, Germany
 //
 // This program is free software: you can redistribute it and/or modify
