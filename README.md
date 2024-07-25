@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10995663.svg)](https://doi.org/10.5281/zenodo.10995663)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12826802.svg)](https://doi.org/10.5281/zenodo.12826802)
 
 # LDACS-Abstract-Radio
 
