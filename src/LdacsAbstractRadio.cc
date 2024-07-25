@@ -28,14 +28,39 @@ LdacsAbstractRadio::LdacsAbstractRadio() :
 }
 
 LdacsAbstractRadio::~LdacsAbstractRadio() {
-    // NOTE: can't use the medium module here, because it may have been already deleted
-    cModule *medium = getSimulation()->getModule(mediumModuleId);
-    if (medium != nullptr)
-        check_and_cast<IRadioMedium *>(medium)->removeRadio(this);
-    cancelAndDelete(transmissionTimer);
-    cancelAndDelete(switchTimer);
-    for (auto timer : allReceptionTimers)
-        cancelAndDelete(timer);
+    // Check if mediumModuleId is valid and if the medium module exists
+    if (mediumModuleId != -1) {
+        cModule *medium = getSimulation()->getModule(mediumModuleId);
+        if (medium != nullptr) {
+            IRadioMedium *radioMedium = dynamic_cast<IRadioMedium *>(medium);
+            if (radioMedium) {
+                radioMedium->removeRadio(this);
+            } else {
+                EV_WARN << "Medium module is not a valid IRadioMedium instance." << endl;
+            }
+        } else {
+            EV_WARN << "Medium module not found with ID: " << mediumModuleId << endl;
+        }
+    } else {
+        EV_WARN << "Invalid mediumModuleId: " << mediumModuleId << endl;
+    }
+
+    // Safely cancel and delete timers
+    if (transmissionTimer) {
+        cancelAndDelete(transmissionTimer);
+        transmissionTimer = nullptr; // Avoid dangling pointer
+    }
+    
+    if (switchTimer) {
+        cancelAndDelete(switchTimer);
+        switchTimer = nullptr; // Avoid dangling pointer
+    }
+
+    for (auto timer : allReceptionTimers) {
+        if (timer) {
+            cancelAndDelete(timer);
+        }
+    }
     allReceptionTimers.clear();
 }
 
